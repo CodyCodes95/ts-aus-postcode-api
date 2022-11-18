@@ -8,6 +8,9 @@ const distance_1 = __importDefault(require("./utils/distance"));
 const postcodes = require("./postcodes.json");
 const port = process.env.PORT || 4000;
 const server = (0, fastify_1.default)();
+server.get("/api/v1", async (req, res) => {
+    res.send({ message: "Please use POST with 'latitude', 'longitude' and 'radius' in the body as numbers to return postcodes within radius" });
+});
 server.post("/api/v1", async (req, res) => {
     const { latitude, longitude, radius } = req.body;
     const matchingPostcodes = postcodes
@@ -17,7 +20,7 @@ server.post("/api/v1", async (req, res) => {
         .map((postcode) => postcode.postcode);
     res.send(matchingPostcodes);
 });
-server.listen(port, (err, address) => {
+server.listen({ port: port }, (err, address) => {
     if (err) {
         console.error(err);
         process.exit(1);

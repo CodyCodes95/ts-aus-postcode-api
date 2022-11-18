@@ -17,6 +17,10 @@ interface BodyData {
   radius: number;
 }
 
+server.get("/api/v1", async (req, res) => {
+    res.send({ message: "Please use POST with 'latitude', 'longitude' and 'radius' in the body as numbers to return postcodes within radius" });
+})
+
 server.post("/api/v1", async (req, res) => {
   const { latitude, longitude, radius } = req.body as BodyData;
   const matchingPostcodes = postcodes
