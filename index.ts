@@ -1,7 +1,8 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 import distance from "./utils/distance";
 const postcodes = require("./postcodes.json");
-const port = process.env.PORT as any || 4000;
+const port = (process.env.PORT as any) || 4000;
 
 const server = fastify();
 
@@ -17,9 +18,15 @@ interface BodyData {
   radius: number;
 }
 
-server.get("/api/v1", async (req, res) => {
-    res.send({ message: "Please use POST with 'latitude', 'longitude' and 'radius' in the body as numbers to return postcodes within radius" });
-})
+server.register(cors, {
+  // put your options here
+});
+
+server.get("/", async (req, res) => {
+  res.send({
+    message: "Please use GET to /api/v1/postcodes/{latitude}/{longitude}/{radius} to return postcodes within radius",
+  });
+});
 
 server.get("/api/v1/postcodes/:latitude/:longitude/:radius", async (req, res) => {
   const { latitude, longitude, radius } = req.params as BodyData;
