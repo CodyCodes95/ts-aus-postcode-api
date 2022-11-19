@@ -11,8 +11,9 @@ const server = (0, fastify_1.default)();
 server.get("/api/v1", async (req, res) => {
     res.send({ message: "Please use POST with 'latitude', 'longitude' and 'radius' in the body as numbers to return postcodes within radius" });
 });
-server.post("/api/v1", async (req, res) => {
-    const { latitude, longitude, radius } = req.body;
+server.get("/api/v1/postcodes/:latitude/:longitude/:radius", async (req, res) => {
+    const { latitude, longitude, radius } = req.params;
+    console.log(typeof longitude, latitude, radius);
     const matchingPostcodes = postcodes
         .filter((postcode) => {
         return (0, distance_1.default)(postcode.lat, postcode.lng, latitude, longitude) < radius ? true : false;

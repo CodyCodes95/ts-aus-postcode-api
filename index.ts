@@ -21,8 +21,8 @@ server.get("/api/v1", async (req, res) => {
     res.send({ message: "Please use POST with 'latitude', 'longitude' and 'radius' in the body as numbers to return postcodes within radius" });
 })
 
-server.post("/api/v1", async (req, res) => {
-  const { latitude, longitude, radius } = req.body as BodyData;
+server.get("/api/v1/postcodes/:latitude/:longitude/:radius", async (req, res) => {
+  const { latitude, longitude, radius } = req.params as BodyData;
   const matchingPostcodes = postcodes
     .filter((postcode: PostcodeData) => {
       return distance(postcode.lat, postcode.lng, latitude, longitude) < radius ? true : false;
