@@ -31,7 +31,7 @@ server.post("/api/v1", async (req, res) => {
   res.send(matchingPostcodes);
 });
 
-server.listen({ port: port }, (err, address) => {
+server.listen({ port: port, host: "0.0.0.0" }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
