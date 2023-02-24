@@ -18,9 +18,7 @@ interface BodyData {
   radius: number;
 }
 
-server.register(cors, {
-  // put your options here
-});
+server.register(cors);
 
 server.get("/", async (req, res) => {
   res.send({

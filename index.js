@@ -9,9 +9,7 @@ const distance_1 = __importDefault(require("./utils/distance"));
 const postcodes = require("./postcodes.json");
 const port = process.env.PORT || 4000;
 const server = (0, fastify_1.default)();
-server.register(cors_1.default, {
-// put your options here
-});
+server.register(cors_1.default);
 server.get("/", async (req, res) => {
     res.send({
         message: "Please use GET to /api/v1/postcodes/{latitude}/{longitude}/{radius} to return postcodes within radius",
